@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>life limit</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <h1>birth</h1>
+    <form action="/birth" method="post">
+      <select name="year">
+        {% for year in range(current_year, current_year - 100, -1) %}
+        <option value="{{ year }}">{{ year }}</option>
+        {% endfor %}
+      </select>
+      <select name="month">
+        {% for month in range(1, 13) %}
+        <option value="{{ month }}">{{ month }}</option>
+        {% endfor %}
+      </select>
+      <select name="day">
+        {% for day in range(1, 32) %}
+        <option value="{{ day }}">{{ day }}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="submit" />
+    </form>
+  </body>
+</html>
