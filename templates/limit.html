@@ -3,10 +3,23 @@
   <head>
     <title>life limit</title>
     <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/limit.css" />
   </head>
   <body>
-    <h1>life limit</h1>
-    {{ params.year }} {{ params.month }} {{ params.day }} {{ age}}
-    <p>{{ until_days }} days until 90 years old</p>
+    <section>
+      <h1>The rest of life</h1>
+      {{ params.year }}/{{ params.month }}/{{ params.day }} ({{ age }})
+      <!-- <p>{{ until_days }} days until 90 years old</p> -->
+      <p>{{ until_months }} months until 90 years old</p>
+      <br />
+      <br />
+
+      <div class="months">
+        {% for i in range(1, 90 * 12) %}
+        <input type="checkbox" name="months" {% if (i < passed_months ) %} checked {% endif %} /> {%
+        endfor %}
+      </div>
+      <!-- <p>{{ until_weeks }} weeks until 90 years old</p> -->
+    </section>
   </body>
 </html>
