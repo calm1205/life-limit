@@ -1,13 +1,5 @@
 # life-limit
 
-## to activate
+## to initialize
 
-source .venv/bin/activate
-
-## to output version file
-
-make freeze
-
-## to install packages
-
-make install
+uv sync
