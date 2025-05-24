@@ -6,5 +6,5 @@
 uv venv --python 3.13.3
 source .venv/bin/activate
 uv sync
-uvicorn main:app --reload
+make dev
 ```
