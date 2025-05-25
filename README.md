@@ -1,4 +1,4 @@
-# life-limit
+# life-span
 
 ## to initialize
 

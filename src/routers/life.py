@@ -4,7 +4,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.requests import Request
 from datetime import date
 
-from src.schemas.limit import LimitQueryParams
+from src.schemas.life import LifeQueryParams
 from src.libs.calculate_age import calculate_age
 from src.libs.days_until_90 import days_until_90
 
@@ -13,7 +13,7 @@ templates = Jinja2Templates(directory="templates")
 
 
 @router.get("/", response_class=HTMLResponse)
-def read_root(request: Request, params: LimitQueryParams = Depends(LimitQueryParams)):
+def read_root(request: Request, params: LifeQueryParams = Depends(LifeQueryParams)):
     birth_date = date(params.year, params.month, params.day)
     age = calculate_age(birth_date)
     passed_days = (date.today() - birth_date).days
@@ -26,7 +26,7 @@ def read_root(request: Request, params: LimitQueryParams = Depends(LimitQueryPar
 
     return templates.TemplateResponse(
         request=request,
-        name="limit.html",
+        name="life.html",
         context={
             "params": params,
             "age": age,
