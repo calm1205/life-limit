@@ -5,10 +5,10 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./src:/usr/share/nginx/html
+      - ./docs:/usr/share/nginx/html
     restart: always
     develop:
       watch:
-        - path: ./src
+        - path: ./docs
           action: rebuild
           target: /usr/share/nginx/html
