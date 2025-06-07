@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>life span</title>
+    <style>
+      .checkbox-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .checkbox-container div {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>life span</h1>
+    <div id="age-display"></div>
+    <div id="checkbox-container" class="checkbox-container"></div>
+
+    <script type="module">
+      import { calculateAge, calculateMonths, getBirthParams } from "./birth.js"
+
+      function createCheckboxes(totalMonths, checkedMonths) {
+        const container = document.getElementById("checkbox-container")
+        container.innerHTML = ""
+
+        for (let i = 0; i < totalMonths; i++) {
+          const div = document.createElement("div")
+          const checkbox = document.createElement("input")
+          checkbox.type = "checkbox"
+          checkbox.checked = i < checkedMonths
+          checkbox.disabled = true
+
+          div.appendChild(checkbox)
+          container.appendChild(div)
+        }
+      }
+
+      function displayAge() {
+        const { year, month, day } = getBirthParams()
+
+        if (year && month && day) {
+          const age = calculateAge(year, month, day)
+          const months = calculateMonths(year, month, day)
+          document.getElementById("age-display").textContent = `あなたの年齢は ${age} 歳です。`
+          createCheckboxes(90 * 12, months)
+        } else {
+          document.getElementById("age-display").textContent =
+            "URLパラメータが正しく設定されていません。"
+        }
+      }
+
+      window.onload = displayAge
+    </script>
+  </body>
+</html>

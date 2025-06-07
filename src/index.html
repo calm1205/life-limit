@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>life span</title>
+  </head>
+  <body>
+    <h1>life span</h1>
+
+    <!-- birth day form -->
+    <form id="birthForm">
+      <select name="year" id="year"></select>
+      <select name="month" id="month"></select>
+      <select name="day" id="day"></select>
+      <button type="submit">submit</button>
+    </form>
+  </body>
+</html>
+
+<script>
+  // 現在の日付を取得
+  const now = new Date()
+  const currentYear = now.getFullYear()
+  const currentMonth = now.getMonth() + 1
+  const currentDay = now.getDate()
+
+  // 年の選択肢を生成（現在から100年前まで）
+  const yearSelect = document.getElementById("year")
+  for (let year = currentYear; year >= currentYear - 100; year--) {
+    const option = document.createElement("option")
+    option.value = year
+    option.textContent = year
+    yearSelect.appendChild(option)
+  }
+
+  // 月の選択肢を生成
+  const monthSelect = document.getElementById("month")
+  for (let month = 1; month <= 12; month++) {
+    const option = document.createElement("option")
+    option.value = month
+    option.textContent = month
+    monthSelect.appendChild(option)
+  }
+
+  // 日の選択肢を生成
+  const daySelect = document.getElementById("day")
+  for (let day = 1; day <= 31; day++) {
+    const option = document.createElement("option")
+    option.value = day
+    option.textContent = day
+    daySelect.appendChild(option)
+  }
+
+  // 月が変更されたときに日の選択肢を更新
+  monthSelect.addEventListener("change", updateDays)
+  yearSelect.addEventListener("change", updateDays)
+
+  function updateDays() {
+    const year = parseInt(yearSelect.value)
+    const month = parseInt(monthSelect.value)
+    const daysInMonth = new Date(year, month, 0).getDate()
+
+    // 現在の選択された日を保存
+    const selectedDay = parseInt(daySelect.value)
+
+    // 日の選択肢をクリア
+    daySelect.innerHTML = ""
+
+    // 新しい日の選択肢を生成
+    for (let day = 1; day <= daysInMonth; day++) {
+      const option = document.createElement("option")
+      option.value = day
+      option.textContent = day
+      if (day === selectedDay && day <= daysInMonth) {
+        option.selected = true
+      }
+      daySelect.appendChild(option)
+    }
+  }
+
+  // 初期表示時に現在の日付を選択
+  yearSelect.value = currentYear
+  monthSelect.value = currentMonth
+  daySelect.value = currentDay
+
+  // フォーム送信時の処理
+  document.getElementById("birthForm").addEventListener("submit", function (e) {
+    e.preventDefault()
+    const year = yearSelect.value
+    const month = monthSelect.value
+    const day = daySelect.value
+
+    // クエリパラメータを設定して遷移
+    window.location.href = `/life-span?year=${year}&month=${month}&day=${day}`
+  })
+</script>
