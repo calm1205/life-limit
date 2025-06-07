@@ -7,5 +7,30 @@
   </head>
   <body>
     <h1>life span</h1>
+    <div id="age-display"></div>
+    <div id="days-display"></div>
+
+    <script type="module">
+      import { calculateAge, calculateDays, getBirthParams } from "./birth.js"
+
+      function displayAge() {
+        const { year, month, day } = getBirthParams()
+
+        if (year && month && day) {
+          const age = calculateAge(year, month, day)
+          const days = calculateDays(year, month, day)
+          const remainingDays = 90 * 365 - days
+          document.getElementById("age-display").textContent = `あなたの年齢は ${age} 歳です。`
+          document.getElementById(
+            "days-display"
+          ).textContent = `90歳までの残り日数は ${remainingDays} 日です。`
+        } else {
+          document.getElementById("age-display").textContent =
+            "URLパラメータが正しく設定されていません。"
+        }
+      }
+
+      window.onload = displayAge
+    </script>
   </body>
 </html>
