@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>❤️‍🔥</text></svg>"
+    />
     <title>life span</title>
     <style>
       .checkbox-container {
@@ -47,7 +51,9 @@
         if (year && month && day) {
           const age = calculateAge(year, month, day)
           const months = calculateMonths(year, month, day)
-          document.getElementById("age-display").textContent = `あなたの年齢は ${age} 歳です。`
+          document.getElementById(
+            "age-display"
+          ).textContent = `あなたの年齢は ${age} 歳です。`
           createCheckboxes(90 * 12, months)
         } else {
           document.getElementById("age-display").textContent =

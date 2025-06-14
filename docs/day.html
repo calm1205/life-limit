@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>❤️‍🔥</text></svg>"
+    />
     <title>life span</title>
   </head>
   <body>
@@ -20,7 +24,9 @@
           const age = calculateAge(year, month, day)
           const days = calculateDays(year, month, day)
           const remainingDays = 90 * 365 - days
-          document.getElementById("age-display").textContent = `あなたの年齢は ${age} 歳です。`
+          document.getElementById(
+            "age-display"
+          ).textContent = `あなたの年齢は ${age} 歳です。`
           document.getElementById(
             "days-display"
           ).textContent = `90歳までの残り日数は ${remainingDays} 日です。`
