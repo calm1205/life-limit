@@ -9,39 +9,65 @@
     />
     <title>lifespan | months</title>
     <style>
-      .checkbox-container {
-        display: flex;
-        flex-wrap: wrap;
+      .grid-container {
+        display: grid;
+        grid-template-columns: 40px repeat(12, 20px);
         gap: 4px;
+        margin-top: 20px;
       }
-      .checkbox-container div {
-        display: flex;
-        align-items: center;
-        gap: 4px;
+      .month-label {
+        text-align: center;
+        font-size: 12px;
+      }
+      .year-label {
+        text-align: right;
+        padding-right: 8px;
+        font-size: 12px;
       }
     </style>
   </head>
   <body>
     <p>How many months until you turn 90?</p>
-    <div id="checkbox-container" class="checkbox-container"></div>
+    <div id="grid-container" class="grid-container"></div>
 
     <script type="module">
       import { getBirthParams } from "./js/birth.js"
       import { calculateMonths } from "./js/calculateMonths.js"
 
-      function createCheckboxes(totalMonths, checkedMonths) {
-        const container = document.getElementById("checkbox-container")
+      function createGrid(totalMonths, checkedMonths) {
+        const container = document.getElementById("grid-container")
         container.innerHTML = ""
 
-        for (let i = 0; i < totalMonths; i++) {
-          const div = document.createElement("div")
-          const checkbox = document.createElement("input")
-          checkbox.type = "checkbox"
-          checkbox.checked = i < checkedMonths
-          checkbox.disabled = true
+        const cornerCell = document.createElement("div")
+        container.appendChild(cornerCell)
 
-          div.appendChild(checkbox)
-          container.appendChild(div)
+        for (let month = 1; month <= 12; month++) {
+          const monthLabel = document.createElement("div")
+          monthLabel.className = "month-label"
+          monthLabel.textContent = month
+          container.appendChild(monthLabel)
+        }
+
+        // Add year rows with checkboxes
+        for (let year = 0; year <= 90; year++) {
+          // Add year label
+          const yearLabel = document.createElement("div")
+          yearLabel.className = "year-label"
+          yearLabel.textContent = year
+          container.appendChild(yearLabel)
+
+          // Add checkboxes for this year
+          for (let month = 0; month < 12; month++) {
+            const div = document.createElement("div")
+            const checkbox = document.createElement("input")
+            checkbox.type = "checkbox"
+            const monthIndex = year * 12 + month
+            checkbox.checked = monthIndex < checkedMonths
+            checkbox.disabled = true
+
+            div.appendChild(checkbox)
+            container.appendChild(div)
+          }
         }
       }
 
@@ -50,10 +76,10 @@
 
         if (year && month && day) {
           const months = calculateMonths(year, month, day)
-          createCheckboxes(90 * 12, months)
+          createGrid(90 * 12, months)
         } else {
-          document.getElementById("age-display").textContent =
-            "URLパラメータが正しく設定されていません。"
+          console.log("no params")
+          window.location.href = `index.html`
         }
       }
 

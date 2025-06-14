@@ -9,39 +9,83 @@
     />
     <title>lifespan | weeks</title>
     <style>
-      .checkbox-container {
-        display: flex;
-        flex-wrap: wrap;
+      .grid-container {
+        display: grid;
+        place-items: center;
+        grid-template-columns: 40px repeat(52, 20px);
         gap: 4px;
+        margin-top: 20px;
       }
-      .checkbox-container div {
-        display: flex;
-        align-items: center;
-        gap: 4px;
+      .grid-header {
+        display: contents;
+      }
+      .grid-header > div {
+        text-align: center;
+        font-size: 12px;
+      }
+      .grid-row {
+        display: contents;
+      }
+      .row-index {
+        text-align: right;
+        font-size: 12px;
       }
     </style>
   </head>
   <body>
     <p>How many weeks until you turn 90?</p>
-    <div id="checkbox-container" class="checkbox-container"></div>
+    <div id="grid-container" class="grid-container"></div>
 
     <script type="module">
       import { getBirthParams } from "./js/birth.js"
       import { calculateWeeks } from "./js/calculateWeeks.js"
 
-      function createCheckboxes(totalWeeks, checkedWeeks) {
-        const container = document.getElementById("checkbox-container")
+      function createGrid(totalWeeks, checkedWeeks) {
+        const container = document.getElementById("grid-container")
         container.innerHTML = ""
 
-        for (let i = 0; i < totalWeeks; i++) {
-          const div = document.createElement("div")
-          const checkbox = document.createElement("input")
-          checkbox.type = "checkbox"
-          checkbox.checked = i < checkedWeeks
-          checkbox.disabled = true
+        // Create header row
+        const headerRow = document.createElement("div")
+        headerRow.className = "grid-header"
 
-          div.appendChild(checkbox)
-          container.appendChild(div)
+        // Add empty cell for top-left corner
+        const cornerCell = document.createElement("div")
+        headerRow.appendChild(cornerCell)
+
+        // Add column indices
+        for (let i = 0; i < 52; i++) {
+          const headerCell = document.createElement("div")
+          headerCell.textContent = i + 1
+          headerRow.appendChild(headerCell)
+        }
+        container.appendChild(headerRow)
+
+        // Create grid rows
+        const rows = Math.ceil(totalWeeks / 52)
+        for (let row = 0; row < rows; row++) {
+          const gridRow = document.createElement("div")
+          gridRow.className = "grid-row"
+
+          // Add row index
+          const rowIndex = document.createElement("div")
+          rowIndex.className = "row-index"
+          rowIndex.textContent = row + 1
+          gridRow.appendChild(rowIndex)
+
+          // Add checkboxes
+          for (let col = 0; col < 52; col++) {
+            const weekIndex = row * 52 + col
+            if (weekIndex < totalWeeks) {
+              const cell = document.createElement("div")
+              const checkbox = document.createElement("input")
+              checkbox.type = "checkbox"
+              checkbox.checked = weekIndex < checkedWeeks
+              checkbox.disabled = true
+              cell.appendChild(checkbox)
+              gridRow.appendChild(cell)
+            }
+          }
+          container.appendChild(gridRow)
         }
       }
 
@@ -50,7 +94,7 @@
 
         if (year && month && day) {
           const weeks = calculateWeeks(year, month, day)
-          createCheckboxes(90 * 52, weeks)
+          createGrid(90 * 52, weeks)
         } else {
           document.getElementById("age-display").textContent =
             "URLパラメータが正しく設定されていません。"
