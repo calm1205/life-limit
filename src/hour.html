@@ -11,7 +11,7 @@
   </head>
   <body>
     <p>How many hours until you turn 90?</p>
-    <div id="days-display"></div>
+    <div id="hours-display"></div>
 
     <script type="module">
       import { getBirthParams } from "./js/birth.js"
@@ -24,11 +24,10 @@
           const days = calculateDays(year, month, day)
           const remainingDays = 90 * 365 - days
           const remainingHours = remainingDays * 24
-          document.getElementById("days-display").textContent =
+          document.getElementById("hours-display").textContent =
             remainingHours + " hours"
         } else {
-          document.getElementById("age-display").textContent =
-            "URLパラメータが正しく設定されていません。"
+          window.location.href = `index.html`
         }
       }
 
