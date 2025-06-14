@@ -15,6 +15,7 @@
       <select name="year" id="year"></select>
       <select name="month" id="month"></select>
       <select name="day" id="day"></select>
+      <button id="hours-button" type="button">hours</button>
       <button id="days-button" type="button">days</button>
       <button id="weeks-button" type="button">weeks</button>
       <button id="months-button" type="button">months</button>
@@ -86,6 +87,18 @@
   // 初期表示時に現在の日付を選択
   yearSelect.value = currentYear
   monthSelect.value = currentMonth
+
+  document
+    .getElementById("hours-button")
+    .addEventListener("click", function (e) {
+      e.preventDefault()
+      const year = yearSelect.value
+      const month = monthSelect.value
+      const day = daySelect.value
+
+      window.location.href = `hour.html?year=${year}&month=${month}&day=${day}`
+    })
+
   daySelect.value = currentDay
 
   document
