@@ -10,14 +10,13 @@
     <title>life span</title>
   </head>
   <body>
-    <h1>life span</h1>
-
-    <!-- birth day form -->
-    <form id="birthForm">
+    <form onsubmit="return false">
       <select name="year" id="year"></select>
       <select name="month" id="month"></select>
       <select name="day" id="day"></select>
-      <button type="submit">submit</button>
+      <button id="days-button" type="button">days</button>
+      <button id="weeks-button" type="button">weeks</button>
+      <button id="months-button" type="button">months</button>
     </form>
   </body>
 </html>
@@ -88,14 +87,34 @@
   monthSelect.value = currentMonth
   daySelect.value = currentDay
 
-  // フォーム送信時の処理
-  document.getElementById("birthForm").addEventListener("submit", function (e) {
-    e.preventDefault()
-    const year = yearSelect.value
-    const month = monthSelect.value
-    const day = daySelect.value
+  document
+    .getElementById("days-button")
+    .addEventListener("click", function (e) {
+      e.preventDefault()
+      const year = yearSelect.value
+      const month = monthSelect.value
+      const day = daySelect.value
 
-    // クエリパラメータを設定して遷移
-    window.location.href = `month.html?year=${year}&month=${month}&day=${day}`
-  })
+      window.location.href = `day.html?year=${year}&month=${month}&day=${day}`
+    })
+
+  document
+    .getElementById("weeks-button")
+    .addEventListener("click", function (e) {
+      e.preventDefault()
+      const year = yearSelect.value
+      const month = monthSelect.value
+      const day = daySelect.value
+      window.location.href = `week.html?year=${year}&month=${month}&day=${day}`
+    })
+
+  document
+    .getElementById("months-button")
+    .addEventListener("click", function (e) {
+      e.preventDefault()
+      const year = yearSelect.value
+      const month = monthSelect.value
+      const day = daySelect.value
+      window.location.href = `month.html?year=${year}&month=${month}&day=${day}`
+    })
 </script>

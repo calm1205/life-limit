@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>❤️‍🔥</text></svg>"
+    />
+    <title>life span | months</title>
+    <style>
+      .checkbox-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .checkbox-container div {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>How many months until you turn 90?</p>
+    <div id="checkbox-container" class="checkbox-container"></div>
+
+    <script type="module">
+      import { getBirthParams } from "./js/birth.js"
+      import { calculateMonths } from "./js/calculateMonths.js"
+
+      function createCheckboxes(totalMonths, checkedMonths) {
+        const container = document.getElementById("checkbox-container")
+        container.innerHTML = ""
+
+        for (let i = 0; i < totalMonths; i++) {
+          const div = document.createElement("div")
+          const checkbox = document.createElement("input")
+          checkbox.type = "checkbox"
+          checkbox.checked = i < checkedMonths
+          checkbox.disabled = true
+
+          div.appendChild(checkbox)
+          container.appendChild(div)
+        }
+      }
+
+      function displayAge() {
+        const { year, month, day } = getBirthParams()
+
+        if (year && month && day) {
+          const months = calculateMonths(year, month, day)
+          createCheckboxes(90 * 12, months)
+        } else {
+          document.getElementById("age-display").textContent =
+            "URLパラメータが正しく設定されていません。"
+        }
+      }
+
+      window.onload = displayAge
+    </script>
+  </body>
+</html>

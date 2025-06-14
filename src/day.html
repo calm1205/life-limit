@@ -7,29 +7,24 @@
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>❤️‍🔥</text></svg>"
     />
-    <title>life span</title>
+    <title>life span | days</title>
   </head>
   <body>
-    <h1>life span</h1>
-    <div id="age-display"></div>
+    <p>How many days until you turn 90?</p>
     <div id="days-display"></div>
 
     <script type="module">
-      import { calculateAge, calculateDays, getBirthParams } from "./birth.js"
+      import { getBirthParams } from "./js/birth.js"
+      import { calculateDays } from "./js/calculateDays.js"
 
       function displayAge() {
         const { year, month, day } = getBirthParams()
 
         if (year && month && day) {
-          const age = calculateAge(year, month, day)
           const days = calculateDays(year, month, day)
           const remainingDays = 90 * 365 - days
-          document.getElementById(
-            "age-display"
-          ).textContent = `あなたの年齢は ${age} 歳です。`
-          document.getElementById(
-            "days-display"
-          ).textContent = `90歳までの残り日数は ${remainingDays} 日です。`
+          document.getElementById("days-display").textContent =
+            remainingDays + " days"
         } else {
           document.getElementById("age-display").textContent =
             "URLパラメータが正しく設定されていません。"

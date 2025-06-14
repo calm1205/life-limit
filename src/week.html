@@ -7,7 +7,7 @@
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>❤️‍🔥</text></svg>"
     />
-    <title>life span</title>
+    <title>life span | weeks</title>
     <style>
       .checkbox-container {
         display: flex;
@@ -22,22 +22,22 @@
     </style>
   </head>
   <body>
-    <h1>life span</h1>
-    <div id="age-display"></div>
+    <p>How many weeks until you turn 90?</p>
     <div id="checkbox-container" class="checkbox-container"></div>
 
     <script type="module">
-      import { calculateAge, calculateMonths, getBirthParams } from "./birth.js"
+      import { getBirthParams } from "./js/birth.js"
+      import { calculateWeeks } from "./js/calculateWeeks.js"
 
-      function createCheckboxes(totalMonths, checkedMonths) {
+      function createCheckboxes(totalWeeks, checkedWeeks) {
         const container = document.getElementById("checkbox-container")
         container.innerHTML = ""
 
-        for (let i = 0; i < totalMonths; i++) {
+        for (let i = 0; i < totalWeeks; i++) {
           const div = document.createElement("div")
           const checkbox = document.createElement("input")
           checkbox.type = "checkbox"
-          checkbox.checked = i < checkedMonths
+          checkbox.checked = i < checkedWeeks
           checkbox.disabled = true
 
           div.appendChild(checkbox)
@@ -49,12 +49,8 @@
         const { year, month, day } = getBirthParams()
 
         if (year && month && day) {
-          const age = calculateAge(year, month, day)
-          const months = calculateMonths(year, month, day)
-          document.getElementById(
-            "age-display"
-          ).textContent = `あなたの年齢は ${age} 歳です。`
-          createCheckboxes(90 * 12, months)
+          const weeks = calculateWeeks(year, month, day)
+          createCheckboxes(90 * 52, weeks)
         } else {
           document.getElementById("age-display").textContent =
             "URLパラメータが正しく設定されていません。"

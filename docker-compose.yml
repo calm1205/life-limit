@@ -9,6 +9,6 @@ services:
     restart: always
     develop:
       watch:
-        - path: ./docs
+        - path: ./src
           action: rebuild
           target: /usr/share/nginx/html
