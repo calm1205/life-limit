@@ -13,8 +13,53 @@
     <p>input your birth date</p>
     <form onsubmit="return false">
       <select name="year" id="year"></select>
-      <select name="month" id="month"></select>
-      <select name="day" id="day"></select>
+      <select name="month" id="month">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+      <select name="day" id="day">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25</option>
+        <option value="26">26</option>
+        <option value="27">27</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+      </select>
       <button id="hours-button" type="button">hours</button>
       <button id="days-button" type="button">days</button>
       <button id="weeks-button" type="button">weeks</button>
@@ -39,25 +84,10 @@
     yearSelect.appendChild(option)
   }
 
-  // 月の選択肢を生成
-  const monthSelect = document.getElementById("month")
-  for (let month = 1; month <= 12; month++) {
-    const option = document.createElement("option")
-    option.value = month
-    option.textContent = month
-    monthSelect.appendChild(option)
-  }
-
-  // 日の選択肢を生成
-  const daySelect = document.getElementById("day")
-  for (let day = 1; day <= 31; day++) {
-    const option = document.createElement("option")
-    option.value = day
-    option.textContent = day
-    daySelect.appendChild(option)
-  }
-
   // 月が変更されたときに日の選択肢を更新
+  const monthSelect = document.getElementById("month")
+  const daySelect = document.getElementById("day")
+
   monthSelect.addEventListener("change", updateDays)
   yearSelect.addEventListener("change", updateDays)
 
