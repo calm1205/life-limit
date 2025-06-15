@@ -60,11 +60,13 @@
         <option value="30">30</option>
         <option value="31">31</option>
       </select>
+    </form>
+    <div>
       <button id="hours-button" type="button">hours</button>
       <button id="days-button" type="button">days</button>
       <button id="weeks-button" type="button">weeks</button>
       <button id="months-button" type="button">months</button>
-    </form>
+    </div>
   </body>
 </html>
 
@@ -162,3 +164,13 @@
       window.location.href = `month.html?year=${year}&month=${month}&day=${day}`
     })
 </script>
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+</style>
